@@ -17,27 +17,28 @@ Vice Cover Studio turns your photos into a neon-drenched poster cover in the spi
 
 ## Run it
 
-No build step and no server is required. Open `index.html` in any modern browser, or serve the folder if you prefer:
+No build step and no server is required. Open `app/index.html` in any modern browser, or serve the folder if you prefer:
 
 ```sh
-python3 -m http.server 8080
+cd app && python3 -m http.server 8080
 ```
 
 then open http://localhost:8080.
 
 ## How it is put together
 
-- `index.html` — the whole editor page: poster stage on the left, control rail on the right.
-- `css/vice.css` — the studio chrome: dark glass panels, neon accents.
-- `js/state.js` — the poster model: layouts, export sizes and panel state.
-- `js/samples.js` — the three sample scenes, each painted in code on a canvas.
-- `js/grades.js` — the four colour grades and how each one re-lights a poster.
-- `js/render.js` — the poster painter: panels, captions, grade, halftone, grain, vignette.
-- `js/ui.js` — the rail wiring: uploads, drag-to-pan, wheel zoom, shuffle and reset.
-- `js/export.js` — full-resolution PNG export.
-- `js/main.js` — startup: fonts, first paint, and the `?cover=` mode used for screenshots.
-- `fonts/` — Oswald and Archivo Black (SIL OFL), loaded locally so the app works offline.
-- `shots/` — the submission screenshots.
+- `app/index.html` — the whole editor page: poster stage on the left, control rail on the right.
+- `app/css/vice.css` — the studio chrome: dark glass panels, neon accents.
+- `app/js/state.js` — the poster model: layouts, export sizes and panel state.
+- `app/js/samples.js` — the three sample scenes, each painted in code on a canvas.
+- `app/js/grades.js` — the four colour grades and how each one re-lights a poster.
+- `app/js/render.js` — the poster painter: panels, captions, grade, halftone, grain, vignette.
+- `app/js/ui.js` — the rail wiring: uploads, drag-to-pan, wheel zoom, shuffle and reset.
+- `app/js/export.js` — full-resolution PNG export.
+- `app/js/main.js` — startup: fonts, first paint, and the `?cover=` mode used for screenshots.
+- `app/fonts/` — Oswald and Archivo Black (SIL OFL), loaded locally so the app works offline.
+- `screenshots/` — the submission screenshots.
+- `main.ts` — the hand-in program: copies `app/` and `screenshots/` to the output folder and writes `dossier.json` with the kit's vendored library (`vendor/makefun-app.ts`). Run it with `MAKEFUN_OUTPUT_DIR=out node main.ts`.
 
 Every image in this repo is drawn in code or supplied by you. No Rockstar logo, artwork, wordmark or font is used anywhere.
 

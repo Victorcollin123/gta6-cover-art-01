@@ -1,1 +1,7 @@
+# Vice Cover Studio — files to leave out of git
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+dist/
 out/

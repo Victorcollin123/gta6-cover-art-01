@@ -4,35 +4,42 @@
 [![rank](https://make.fun/badge/gta6-cover-art-01/Victorcollin123/gta6-cover-art-01/rank.svg)](https://make.fun/bounty/gta6-cover-art-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-cover-art-01)
 [![reward](https://make.fun/badge/gta6-cover-art-01/Victorcollin123/gta6-cover-art-01/reward.svg)](https://make.fun/bounty/gta6-cover-art-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-cover-art-01)
 
-Vice Cover Studio is a fully offline poster maker: drop in your own photo, pick a multi-panel layout, write a caption, and it renders GTA 6-style cover art — big condensed lettering, a sunset or neon colour grade, halftone dots, film grain and a vignette — then exports a share-ready PNG.
+Vice Cover Studio turns your photos into a neon-drenched poster cover in the spirit of GTA 6 key art. Pick a multi-panel layout, drop a photo into each frame, grade it like a Miami sunset, set the headline, and download a print-ready PNG. Everything runs in the browser — your photos never leave your machine.
 
-## What it does
+## What you can do
 
-- **Any photo, any panel** — upload one photo or several, from your machine only. Each panel can take its own photo, one photo can fill several panels, and every panel pans by dragging, zooms with a slider or the scroll wheel, and flips.
-- **Three layouts** — a large hero panel with two side panels, a three-panel split, or a single full-bleed panel.
-- **Four grades, drawn on canvas** — Vice Sunset, Neon Nights, Palm Noir and Pastel Vice, each with its own sun glow, wash and lettering accent, plus halftone, grain and vignette overlays.
-- **Live caption** — an editable title, subtitle and place line in condensed display type (Oswald and Archivo Black, shipped under the SIL Open Font License), with an outline, a gradient fill and a drop shadow.
-- **Three export sizes** — 1920×1080, 1080×1080 and 1080×1350, rendered at full resolution and downloaded as PNG.
+- **Fill every panel your way** — each panel takes its own upload, or starts with a painted sample scene (a boulevard sunset, a neon pier, a palm-lined dusk). Drag a photo to reposition it, zoom with the slider or scroll wheel, flip it, or swap the scene.
+- **Three poster layouts** — hero plus two stacked panels, an even three-way split, or one full-bleed photo.
+- **Four canvas grades** — Vice Sunset, Neon Nights, Palm Noir and Pastel Vice. Each one re-lights the poster with its own wash, top light and caption accent.
+- **Print texture** — halftone dots that follow the poster's own shadows, film grain and a vignette, each with its own strength.
+- **Headline typography** — an editable title, tagline and place line in condensed display type (Oswald and Archivo Black, bundled under the SIL Open Font License), with an outline, a sunset gradient fill and a drop shadow.
+- **Three export sizes** — 1080 × 1350 portrait, 1080 × 1080 square and 1920 × 1080 landscape, rendered at full resolution and saved as PNG.
 
 ## Run it
 
+No build step and no server is required. Open `index.html` in any modern browser, or serve the folder if you prefer:
+
 ```sh
-node serve.ts
+python3 -m http.server 8080
 ```
 
-Then open http://localhost:8080. No build step, no network requests, nothing uploaded.
+then open http://localhost:8080.
 
-## How it is built
+## How it is put together
 
-- `app/index.html` — the editor page: controls on the left, live canvas preview on the right.
-- `app/src/cover.js` — the poster engine: layouts, grades, overlays and lettering, all drawn on canvas.
-- `app/src/main.js` — the editor wiring: uploads, panel controls, drag-to-pan, wheel zoom and export.
-- `app/src/shots.js` — the fixed `?shot=cover` and `?shot=editor` scenes used for the screenshots.
-- `app/style.css` — the editor chrome.
-- `main.ts` — copies `app/` and `screenshots/` to the output folder and writes `dossier.json`.
-- `shots.json` — the screenshot scenes, in step with `shots.js`.
+- `index.html` — the whole editor page: poster stage on the left, control rail on the right.
+- `css/vice.css` — the studio chrome: dark glass panels, neon accents.
+- `js/state.js` — the poster model: layouts, export sizes and panel state.
+- `js/samples.js` — the three sample scenes, each painted in code on a canvas.
+- `js/grades.js` — the four colour grades and how each one re-lights a poster.
+- `js/render.js` — the poster painter: panels, captions, grade, halftone, grain, vignette.
+- `js/ui.js` — the rail wiring: uploads, drag-to-pan, wheel zoom, shuffle and reset.
+- `js/export.js` — full-resolution PNG export.
+- `js/main.js` — startup: fonts, first paint, and the `?cover=` mode used for screenshots.
+- `fonts/` — Oswald and Archivo Black (SIL OFL), loaded locally so the app works offline.
+- `shots/` — the submission screenshots.
 
-All art in this repo is original. No Rockstar logo, artwork, wordmark or font is used anywhere.
+Every image in this repo is drawn in code or supplied by you. No Rockstar logo, artwork, wordmark or font is used anywhere.
 
 ---
 

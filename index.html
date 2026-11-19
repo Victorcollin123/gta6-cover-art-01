@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio — GTA-style poster maker</title>
+<link rel="stylesheet" href="css/vice.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">VCS</span>
+    <div>
+      <h1>Vice Cover Studio</h1>
+      <p>Build a neon-soaked poster cover from your own photos</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="shuffleBtn" class="btn ghost" type="button">Shuffle look</button>
+    <button id="resetBtn" class="btn ghost" type="button">Reset</button>
+    <button id="exportBtn" class="btn primary" type="button">Export PNG</button>
+  </div>
+</header>
+
+<main class="workspace">
+  <section class="stage-wrap">
+    <div class="stage-toolbar">
+      <span id="stageLabel" class="stage-label">Poster preview</span>
+      <span id="stageSize" class="stage-size"></span>
+    </div>
+    <div class="stage-scroll">
+      <canvas id="stage" width="1080" height="1350"></canvas>
+    </div>
+    <p class="stage-hint">Click a panel to select it, then drag its photo to reposition it. Scroll over a panel to zoom.</p>
+  </section>
+
+  <aside class="rail">
+    <section class="panel" aria-label="Layout">
+      <h2>Layout</h2>
+      <div class="seg" id="layoutSeg" role="group" aria-label="Poster layout">
+        <button type="button" data-layout="hero" class="seg-btn active">Hero + duo</button>
+        <button type="button" data-layout="trio" class="seg-btn">Three panels</button>
+        <button type="button" data-layout="solo" class="seg-btn">Full bleed</button>
+      </div>
+      <p class="note">Hero + duo leads with one big frame and two stacked beside it. Three panels splits the cover evenly. Full bleed is a single photo edge to edge.</p>
+    </section>
+
+    <section class="panel" aria-label="Colour grade">
+      <h2>Colour grade</h2>
+      <div class="grades" id="gradeGrid" role="group" aria-label="Colour grade">
+        <button type="button" class="grade-btn active" data-grade="sunset">
+          <span class="swatch sw-sunset"></span>Vice Sunset
+        </button>
+        <button type="button" class="grade-btn" data-grade="neon">
+          <span class="swatch sw-neon"></span>Neon Nights
+        </button>
+        <button type="button" class="grade-btn" data-grade="noir">
+          <span class="swatch sw-noir"></span>Palm Noir
+        </button>
+        <button type="button" class="grade-btn" data-grade="pastel">
+          <span class="swatch sw-pastel"></span>Pastel Vice
+        </button>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Panels">
+      <h2>Panels &amp; photos</h2>
+      <div id="panelList" class="panel-list"></div>
+      <p class="note">No upload yet? Each panel starts with a painted sample scene. Drop in your own photo any time — it stays on your device, nothing is uploaded anywhere.</p>
+    </section>
+
+    <section class="panel" aria-label="Captions">
+      <h2>Captions</h2>
+      <label class="field">
+        <span>Title</span>
+        <input id="titleInput" type="text" maxlength="28" value="SUNSET HEIST" autocomplete="off">
+      </label>
+      <label class="field">
+        <span>Tagline</span>
+        <input id="subtitleInput" type="text" maxlength="60" value="Two thieves. One last score." autocomplete="off">
+      </label>
+      <label class="field">
+        <span>Place line</span>
+        <input id="placeInput" type="text" maxlength="24" value="LEONIDA" autocomplete="off">
+      </label>
+      <div class="checks">
+        <label class="check"><input id="outlineChk" type="checkbox" checked> Bold outline</label>
+        <label class="check"><input id="gradientChk" type="checkbox" checked> Sunset gradient title</label>
+        <label class="check"><input id="shadowChk" type="checkbox" checked> Drop shadow</label>
+      </div>
+    </section>
+
+    <section class="panel" aria-label="Print texture">
+      <h2>Print texture</h2>
+      <label class="field slider-field">
+        <span>Halftone dots <output id="halftoneOut">55%</output></span>
+        <input id="halftoneRange" type="range" min="0" max="100" value="55">
+      </label>
+      <label class="field slider-field">
+        <span>Film grain <output id="grainOut">50%</output></span>
+        <input id="grainRange" type="range" min="0" max="100" value="50">
+      </label>
+      <label class="check"><input id="vignetteChk" type="checkbox" checked> Darken the edges (vignette)</label>
+    </section>
+
+    <section class="panel" aria-label="Export">
+      <h2>Export</h2>
+      <label class="field">
+        <span>Export size</span>
+        <select id="sizeSelect">
+          <option value="1080x1350" selected>1080 × 1350 — portrait post</option>
+          <option value="1080x1080">1080 × 1080 — square post</option>
+          <option value="1920x1080">1920 × 1080 — landscape cover</option>
+        </select>
+      </label>
+      <button id="exportBtn2" class="btn primary block" type="button">Download PNG</button>
+      <p class="note">Exports render at full resolution with every grade and texture baked in.</p>
+    </section>
+  </aside>
+</main>
+
+<footer class="foot">
+  <p>Vice Cover Studio runs entirely in your browser. Photos never leave your device. No game artwork, logos or trademarks are used — every scene is painted in code.</p>
+</footer>
+
+<script src="js/state.js"></script>
+<script src="js/samples.js"></script>
+<script src="js/grades.js"></script>
+<script src="js/render.js"></script>
+<script src="js/export.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

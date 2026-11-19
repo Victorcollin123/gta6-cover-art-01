@@ -1,0 +1,453 @@
+/* Vice Cover Studio — studio chrome. Dark glass panels, neon accents. */
+
+@font-face {
+  font-family: "Oswald";
+  src: url("../fonts/Oswald.ttf") format("truetype");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Archivo Black";
+  src: url("../fonts/ArchivoBlack.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0d0a12;
+  --bg-soft: #16101f;
+  --panel: #1c1526;
+  --panel-edge: #332847;
+  --ink: #f4eefc;
+  --ink-dim: #b9a8cf;
+  --ink-faint: #7d6c96;
+  --pink: #ff2e88;
+  --orange: #ff7a18;
+  --cyan: #22d3ee;
+  --gold: #ffc93c;
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  background:
+    radial-gradient(1100px 500px at 85% -10%, rgba(255, 46, 136, 0.22), transparent 60%),
+    radial-gradient(900px 480px at -10% 0%, rgba(34, 211, 238, 0.14), transparent 55%),
+    var(--bg);
+  color: var(--ink);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+/* ---------- top bar ---------- */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 22px;
+  border-bottom: 1px solid var(--panel-edge);
+  background: rgba(13, 10, 18, 0.85);
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 12px;
+  font-family: "Archivo Black", sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: linear-gradient(135deg, var(--orange), var(--pink) 55%, #7c3aed);
+  box-shadow: 0 6px 22px rgba(255, 46, 136, 0.45);
+}
+
+.brand h1 {
+  margin: 0;
+  font-family: "Oswald", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.brand p {
+  margin: 2px 0 0;
+  color: var(--ink-dim);
+  font-size: 13px;
+}
+
+.top-actions { display: flex; gap: 10px; flex: none; }
+
+/* ---------- buttons ---------- */
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--panel-edge);
+  background: var(--panel);
+  color: var(--ink);
+  font: 600 14px/1 "Segoe UI", system-ui, sans-serif;
+  padding: 11px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:hover { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(255, 46, 136, 0.18); }
+.btn:active { transform: translateY(1px); }
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--orange), var(--pink));
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(255, 46, 136, 0.35);
+}
+
+.btn.ghost { background: transparent; }
+.btn.block { width: 100%; margin-top: 4px; }
+
+/* ---------- workspace ---------- */
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 348px;
+  gap: 20px;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 20px 22px;
+  align-items: start;
+}
+
+.stage-wrap {
+  background: var(--bg-soft);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius);
+  padding: 14px;
+  position: sticky;
+  top: 86px;
+}
+
+.stage-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 2px 4px 12px;
+}
+
+.stage-label {
+  font-family: "Oswald", sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.stage-size { color: var(--ink-faint); font-size: 12px; }
+
+.stage-scroll {
+  display: grid;
+  place-items: center;
+  background:
+    linear-gradient(45deg, #120d1a 25%, transparent 25%, transparent 75%, #120d1a 75%),
+    linear-gradient(45deg, #120d1a 25%, #171021 25%, #171021 75%, #120d1a 75%);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+  border-radius: 10px;
+  padding: 14px;
+  min-height: 320px;
+}
+
+#stage {
+  max-width: 100%;
+  max-height: calc(100vh - 250px);
+  width: auto;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+  cursor: grab;
+  touch-action: none;
+}
+
+#stage:active { cursor: grabbing; }
+
+.stage-hint {
+  margin: 12px 4px 2px;
+  color: var(--ink-faint);
+  font-size: 12.5px;
+  text-align: center;
+}
+
+/* ---------- control rail ---------- */
+
+.rail { display: flex; flex-direction: column; gap: 14px; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--panel-edge);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.panel h2 {
+  margin: 0 0 12px;
+  font-family: "Oswald", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.note {
+  margin: 10px 0 0;
+  color: var(--ink-faint);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+/* segmented layout picker */
+.seg { display: flex; gap: 6px; }
+
+.seg-btn {
+  flex: 1;
+  appearance: none;
+  border: 1px solid var(--panel-edge);
+  background: transparent;
+  color: var(--ink-dim);
+  font: 600 12.5px/1.3 "Segoe UI", system-ui, sans-serif;
+  padding: 9px 6px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.seg-btn.active {
+  background: linear-gradient(135deg, rgba(255, 122, 24, 0.25), rgba(255, 46, 136, 0.25));
+  border-color: var(--pink);
+  color: #fff;
+}
+
+/* grade swatches */
+.grades { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+.grade-btn {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  appearance: none;
+  border: 1px solid var(--panel-edge);
+  background: transparent;
+  color: var(--ink);
+  font: 600 13px/1.2 "Segoe UI", system-ui, sans-serif;
+  padding: 9px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.grade-btn.active { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.16); }
+
+.swatch {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.sw-sunset { background: linear-gradient(135deg, #ff7a18, #ff2e88 60%, #2b1055); }
+.sw-neon { background: linear-gradient(135deg, #22d3ee, #ff2e88 55%, #12081f); }
+.sw-noir { background: linear-gradient(135deg, #e8e8e8, #5b5b66 55%, #0a0a0c); }
+.sw-pastel { background: linear-gradient(135deg, #ffd6ec, #a5f3fc 55%, #fef3c7); }
+
+/* panel cards */
+.panel-list { display: flex; flex-direction: column; gap: 10px; }
+
+.panel-card {
+  border: 1px solid var(--panel-edge);
+  border-radius: 11px;
+  padding: 11px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.panel-card.selected { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.14); }
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+
+.panel-head strong {
+  font-family: "Oswald", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mini-btn {
+  appearance: none;
+  border: 1px solid var(--panel-edge);
+  background: transparent;
+  color: var(--ink-dim);
+  font: 600 12px/1 "Segoe UI", system-ui, sans-serif;
+  padding: 7px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.mini-btn:hover { color: #fff; border-color: var(--pink); }
+.mini-btn.on { color: #fff; border-color: var(--cyan); background: rgba(34, 211, 238, 0.12); }
+
+.panel-row { display: flex; gap: 10px; align-items: center; }
+
+.thumb {
+  width: 62px;
+  height: 62px;
+  flex: none;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--panel-edge);
+  background: #0a0710;
+}
+
+.panel-controls { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 7px; }
+
+.upload-label {
+  display: inline-block;
+  border: 1px dashed var(--panel-edge);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-dim);
+  cursor: pointer;
+  text-align: center;
+}
+
+.upload-label:hover { color: #fff; border-color: var(--cyan); }
+.upload-label input { display: none; }
+
+.zoom-row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-dim); }
+.zoom-row input[type="range"] { flex: 1; }
+
+/* fields */
+.field { display: block; margin-bottom: 11px; }
+.field > span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--ink-dim);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.field input[type="text"],
+.field select {
+  width: 100%;
+  border: 1px solid var(--panel-edge);
+  border-radius: 9px;
+  background: var(--bg-soft);
+  color: var(--ink);
+  font: 500 14px/1.3 "Segoe UI", system-ui, sans-serif;
+  padding: 10px 11px;
+  outline: none;
+}
+
+.field input[type="text"]:focus,
+.field select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.16); }
+
+.field input[type="range"] { width: 100%; accent-color: var(--pink); }
+
+.slider-field > span {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.slider-field output { color: var(--ink); font-weight: 700; }
+
+.checks { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 2px; }
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--ink-dim);
+  cursor: pointer;
+  margin-bottom: 6px;
+}
+
+.check input { accent-color: var(--pink); width: 15px; height: 15px; }
+
+/* footer */
+.foot {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 6px 22px 26px;
+  color: var(--ink-faint);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+/* cover-only mode (headless screenshots): poster fills the window.
+   The stage canvas lives inside .workspace, so hide the chrome around it
+   instead of the workspace itself. */
+body.cover-mode { background: #000; }
+body.cover-mode .topbar,
+body.cover-mode .rail,
+body.cover-mode .foot,
+body.cover-mode .stage-toolbar,
+body.cover-mode .stage-hint { display: none; }
+body.cover-mode .workspace {
+  display: block;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+body.cover-mode .stage-wrap {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background: #000;
+  position: static;
+}
+body.cover-mode .stage-scroll {
+  padding: 0;
+  background: #000;
+  border-radius: 0;
+  min-height: 0;
+}
+body.cover-mode #stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  max-height: none;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: contain;
+}
+
+@media (max-width: 960px) {
+  .workspace { grid-template-columns: 1fr; }
+  .stage-wrap { position: static; }
+  .topbar { flex-wrap: wrap; }
+}

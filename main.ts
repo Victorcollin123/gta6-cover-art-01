@@ -1,11 +1,11 @@
-// Vice Cover Studio — entrypoint for the make.fun grader (Node 22,
-// standard library only). It gathers the static app in app/ and the
-// screenshots in screenshots/ into the output folder and writes the
+// Vice Cover Studio — the entry point the make.fun grader runs (Node 22,
+// standard library only). It copies the static app in app/ and the
+// screenshots in screenshots/ into the output folder, then writes the
 // dossier the judge reads, using the vendored make.fun helper.
 //
-// Run it locally like this:
+// Local check:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
-// Inside the grader MAKEFUN_OUTPUT_DIR is unset and /output is used.
+// In the grader MAKEFUN_OUTPUT_DIR is unset and /output is used instead.
 
 import { cpSync, existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -14,14 +14,12 @@ import { buildDossier } from "./vendor/makefun-app.ts";
 
 const repoRoot = fileURLToPath(new URL(".", import.meta.url));
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
-const appDir = join(repoRoot, "app");
-const shotsDir = join(repoRoot, "screenshots");
 
 mkdirSync(outputDir, { recursive: true });
-cpSync(appDir, join(outputDir, "app"), { recursive: true });
+cpSync(join(repoRoot, "app"), join(outputDir, "app"), { recursive: true });
 mkdirSync(join(outputDir, "screenshots"), { recursive: true });
-if (existsSync(shotsDir)) {
-  cpSync(shotsDir, join(outputDir, "screenshots"), { recursive: true });
+if (existsSync(join(repoRoot, "screenshots"))) {
+  cpSync(join(repoRoot, "screenshots"), join(outputDir, "screenshots"), { recursive: true });
 }
 
 const dossier = buildDossier(outputDir, {

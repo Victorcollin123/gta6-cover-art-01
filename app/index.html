@@ -10,8 +10,10 @@
 <body>
 <main class="app">
   <section class="controls" aria-label="Cover controls">
-    <h1>Vice Cover Studio</h1>
-    <p class="tagline">Your photo, a caption, and a sunset grade — a poster cover in three steps.</p>
+    <header class="masthead">
+      <h1>Vice Cover Studio</h1>
+      <p class="tagline">Your photo, your caption, a sunset grade — a poster cover in three steps.</p>
+    </header>
 
     <div class="group">
       <label for="photo">1 · Photos <span class="hint">from your machine, never uploaded</span></label>
@@ -29,9 +31,9 @@
     </div>
 
     <div class="group">
-      <span class="label">Panels</span>
+      <span class="label">Panels <span class="hint">click a panel name to make it active</span></span>
       <div id="panelRows" class="panel-rows"></div>
-      <p class="hint">Drag a panel in the preview to pan the photo. Zoom and flip live below.</p>
+      <p class="hint">Drag a panel in the preview to pan its photo, scroll over it to zoom, or use the sliders below.</p>
     </div>
 
     <div class="group">
@@ -51,6 +53,7 @@
         <button type="button" data-grade="noir">Palm Noir</button>
         <button type="button" data-grade="pastel">Pastel Vice</button>
       </div>
+      <button id="shuffle" type="button" class="ghost">Try the next grade →</button>
     </div>
 
     <div class="group">
@@ -63,6 +66,9 @@
     </div>
 
     <button id="export" type="button" class="export">Export PNG</button>
+    <div class="row">
+      <button id="reset" type="button" class="ghost">Start fresh</button>
+    </div>
     <p id="status" role="status"></p>
     <p class="fine">Original art made on your machine. No Rockstar logo, artwork or font — the display type is Oswald and Archivo Black under the SIL Open Font License.</p>
   </section>
